@@ -1,5 +1,5 @@
-const DataTypes = require("sequelize/lib/data-types");
-const sequelize = require("./sqlInitialize");
+const DataTypes = require("sequelize").DataTypes;
+const sequelize = require("../repository/SqlInitialize");
 
 const Book = sequelize.define("Book", {
   id: {
