@@ -79,4 +79,37 @@ describe("Book", () => {
         });
     });
   });
+
+  describe("POST book/", () => {
+    it("should add a book", (done) => {
+      let query = sinon.stub(Book, "create");
+      stubMethods.push(query);
+      let passedBook = Book.build({
+        id: 2,
+        title: "book",
+        author: "writer",
+      });
+      query.returns(
+        new Promise((resolve) => {
+          resolve(
+            Book.build({
+              id: 1,
+              title: "book",
+              author: "writer",
+            })
+          );
+        })
+      );
+      chai
+        .request(app)
+        .post("/book")
+        .send(passedBook)
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          expect(res.body.id).to.equal(1);
+          expect(query.calledOnce).to.be.true;
+          done();
+        });
+    });
+  });
 });

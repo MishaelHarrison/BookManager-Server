@@ -46,6 +46,7 @@ router.get("/", (_req, res) => {
  * @apiUse respondBook
  */
 router.post("/", (req, res) => {
+  console.log(JSON.stringify(req.body));
   Book.create(req.body)
     .then((x) => res.status(201).send(x))
     .catch(() => res.status(500).send());
