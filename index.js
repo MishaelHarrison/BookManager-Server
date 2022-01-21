@@ -14,11 +14,11 @@ const doc = createDoc({
   silent: true,
 });
 
+if (typeof doc === "boolean") console.log("Documentation not generated");
+
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-if (typeof doc === "boolean") console.log("Documentation not generated");
 
 const PORT = 8080;
 app.use(require("cors")());
